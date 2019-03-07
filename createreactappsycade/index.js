@@ -122,11 +122,18 @@ const run = async () => {
     commandsToRun.push(`npx create-react-app ${appName.toLowerCase()} --typescript`);
   }
 
-  if (readlineSync.keyInYN('\nDo you want to use redux?(y/n)\n')) {
+  if (readlineSync.keyInYN('\nDo you want to use redux with thunk?(y/n)\n')) {
     packagesToInstall.push('redux');
-    packagesToInstall.push('redux react-redux');
+		packagesToInstall.push('react-redux');
+		packagesToInstall.push('redux-thunk');
+		devPackagesToInstall.push('@types/react-redux');
+		devPackagesToInstall.push('@types/redux-thunk');
+		devPackagesToInstall.push('redux-devtools-extension');
     conditions.push('redux');
-    devPackagesToInstall.push('@types/react-redux');
+	}
+	
+	if (readlineSync.keyInYN('\nDo you want to setup generic async actions and reducers?(y/n)\n')) {
+    conditions.push('asyncactions');
   }
 
   if (readlineSync.keyInYN('\nDo you want to use routes?(y/n)\n')) {

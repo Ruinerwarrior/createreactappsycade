@@ -4,10 +4,9 @@ import { setTitle } from '../../actions/title';
 import { RootState, asyncActionState } from '../../types/state';
 import { AsyncActionStatus } from '../../types/actions';
 import { bindActionCreators, Action, Dispatch } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 interface Props {
-  title: string;
-  titleStatus: AsyncActionStatus;
   fullTitle: asyncActionState<string>;
   setTitle: typeof setTitle;
 }
@@ -16,7 +15,7 @@ interface State {
   titleInput: string
 }
 
-type StateProps = Pick<Props, 'title' | 'titleStatus' | 'fullTitle'>;
+type StateProps = Pick<Props, 'fullTitle'>;
 type DispatchProps = Pick<Props, 'setTitle'>;
 
 class Home extends React.Component<Props, State> {
@@ -25,7 +24,7 @@ class Home extends React.Component<Props, State> {
   };
 
   render() {
-    const { title, titleStatus, fullTitle } = this.props;
+    const { fullTitle } = this.props;
     const { titleInput } = this.state;
     return (
       <div className="hero is-primary">
@@ -54,16 +53,14 @@ class Home extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  title: state.title,
-  titleStatus: state.titleStatus,
   fullTitle: state.fullTitle
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => bindActionCreators(
-  {
-    setTitle
-  },
-  dispatch
-);
+const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, any>) => {
+	return   {
+    setTitle: (title: string) => dispatch(setTitle(title))
+  }
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
