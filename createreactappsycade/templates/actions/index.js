@@ -1,6 +1,7 @@
 module.exports = (conditions) => {
 	return(
 `import { StartedAsyncAction, SucceededAsyncAction, FailedAsyncAction, AsyncActionStatus } from "../types/actions";
+
 function startedAsyncAction<T>(type: T): StartedAsyncAction<T> {
 	return {
 		type,

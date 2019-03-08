@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+let steps = require('./steps');
 let shell = require('shelljs');
 let colors = require('colors');
 let fs = require('fs'); //fs already comes included with node.
@@ -11,6 +12,7 @@ let appDirectory = '';
 let defaultFilesToRemove = [
   'App.tsx', 'App.test.tsx', 'index.css', 'logo.svg', 'App.css',
 ];
+
 
 let conditions = [];
 
@@ -29,7 +31,7 @@ const createReactApp = (commandsToRun) => {
         console.log("\ncreate-react-redux-router-app ", "app-name\n".cyan)
         resolve(false)
       }
-    } catch(error) {
+    } catch (error) {
       console.log('Something went wrong while creating react app, try to run: "npm install -g create-react-app" before running "create-react-sycade-app"')
     }
   })
@@ -40,7 +42,7 @@ const installPackages = async (packagesToInstall) => {
     try {
       if (packagesToInstall.length > 0) {
         console.log(`installing packages: ${packagesToInstall.join(' ')}\n`);
-        shell.exec(`npm install --save` + packagesToInstall.join(' '));
+        shell.exec(`npm install --save ` + packagesToInstall.join(' '));
         console.log('packages installed\n'.green);
       }
       resolve(true);
@@ -56,7 +58,7 @@ const installDevPackages = async (devPackagesToInstall) => {
     try {
       if (devPackagesToInstall.length > 0) {
         console.log(`installing dev dependency packages: ${devPackagesToInstall.join(' ')}\n`);
-        shell.exec(`npm install --save-dev` + devPackagesToInstall.join(' '));
+        shell.exec(`npm install --save-dev ` + devPackagesToInstall.join(' '));
         console.log('packages installed\n'.green);
       }
       resolve(true);
@@ -69,17 +71,17 @@ const installDevPackages = async (devPackagesToInstall) => {
 
 const createCustomTemplate = async () => {
   return new Promise(resolve => {
-      templates.forEach(file => {
-        if(file.reqconditions.every(rc => { return conditions.indexOf(rc) !== -1 })) {
-          ensureDirectoryExistence(file.fileName);
-          if (file.value !== null) {
-            fs.writeFile(`${appDirectory}/src/${file.fileName}`, file.value(conditions), function (err) {
-              if (err) { return console.log(err) }
-            })
-          }
+    templates.forEach(file => {
+      if (file.reqconditions.every(rc => { return conditions.indexOf(rc) !== -1 })) {
+        ensureDirectoryExistence(file.fileName);
+        if (file.value !== null) {
+          fs.writeFile(`${appDirectory}/src/${file.fileName}`, file.value(conditions), function (err) {
+            if (err) { return console.log(err) }
+          })
         }
-      });
-      resolve(true);
+      }
+    });
+    resolve(true);
   })
 }
 
@@ -114,7 +116,7 @@ const run = async () => {
 
   console.log('\nanswer the questions to navigate through the project setup\n');
 
-  if(appName === undefined) {
+  if (appName === undefined) {
     appName = readlineSync.question('\nWhat is the name of the application?\n');
   }
   if (appName !== undefined) {
@@ -122,45 +124,13 @@ const run = async () => {
     commandsToRun.push(`npx create-react-app ${appName.toLowerCase()} --typescript`);
   }
 
-  if (readlineSync.keyInYN('\nDo you want to use redux with thunk?(y/n)\n')) {
-    packagesToInstall.push('redux');
-		packagesToInstall.push('react-redux');
-		packagesToInstall.push('redux-thunk');
-		devPackagesToInstall.push('@types/react-redux');
-		devPackagesToInstall.push('@types/redux-thunk');
-		devPackagesToInstall.push('redux-devtools-extension');
-    conditions.push('redux');
-	}
-	
-	if (readlineSync.keyInYN('\nDo you want to setup generic async actions and reducers?(y/n)\n')) {
-    conditions.push('asyncactions');
-  }
-
-  if (readlineSync.keyInYN('\nDo you want to use routes?(y/n)\n')) {
-    packagesToInstall.push('react-router-dom');
-    conditions.push('routes');
-    devPackagesToInstall.push('@types/react-router-dom @types/react-router');
-  }
-
-  if (readlineSync.keyInYN('\nDo you want to have a basic api setup?(y/n)\n')) {
-    packagesToInstall.push('axios');
-    conditions.push('api');
-  }
-
-  // if (readlineSync.keyInYN('\nDo you want to setup authorization?(y/n)')) {
-  //   conditions.push('authorization');
-  // }
-
-  if (readlineSync.keyInYN('\nDo you want to use bulma?(y/n)\n')) {
-    packagesToInstall.push('bulma');
-    conditions.push('bulma');
-    devPackagesToInstall.push('@types/react-redux');
-  }
-
-  if(readlineSync.keyInYN('\nDo you want sass support?(y/n)\n')) {
-    packagesToInstall.push('node-sass');
-    conditions.push('sass');
-  }
+  steps.forEach(s => {
+    if(readlineSync.keyInYNStrict(s.question)) {
+      conditions.push(...s.conditions);
+      packagesToInstall.push(...s.packagesToInstall);
+      devPackagesToInstall.push(...s.devPackagesToInstall);
+    }
+  });
 
   if (!await createReactApp(commandsToRun)) {
     console.log('\nSomething went wrong with create-react-app\n');
