@@ -1,5 +1,13 @@
 import { StartedAsyncAction, SucceededAsyncAction, FailedAsyncAction, AsyncActionStatus } from "../types/actions";
 
+/**
+ * The action returned by the "async" action just before the asynchronous action passed to the "async" action is started
+ *  
+ * @template T The action type
+ * 
+ * @param[type] The action type
+ * 
+**/
 function startedAsyncAction<T>(type: T): StartedAsyncAction<T> {
   return {
     type,
@@ -7,6 +15,15 @@ function startedAsyncAction<T>(type: T): StartedAsyncAction<T> {
   };
 }
 
+/**
+ * The action returned by the "async" action if the asynchronous action passed to the "async" action succeeded
+ *  
+ * @template T The action type
+ * @template P The return type of the asynchronous action passed to the "async" action
+ * 
+ * @param[type] The action type
+ * @param[error] the error returned by the failed asynchronous action
+**/
 function succeededAsyncAction<T, P>(type: T, payload: P): SucceededAsyncAction<T, P> {
   return {
     type,
@@ -15,6 +32,14 @@ function succeededAsyncAction<T, P>(type: T, payload: P): SucceededAsyncAction<T
   };
 }
 
+/**
+ * The action returned by the "async" action if the asynchronous action passed to the "async" action failed
+ *  
+ * @template T The action type
+ * 
+ * @param[type] The action type
+ * @param[error] the error returned by the failed asynchronous action
+**/
 function failedAsyncAction<T>(type: T, error: Error): FailedAsyncAction<T> {
   return {
     type,

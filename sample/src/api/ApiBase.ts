@@ -14,7 +14,7 @@ export enum HttpRequestTypes {
 };
 
 class ApiBase {
-
+  
   public static doHttpRequest<T> (
       method: HttpRequestTypes, 
       url: string, 
