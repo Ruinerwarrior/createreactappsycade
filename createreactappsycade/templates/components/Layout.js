@@ -13,7 +13,7 @@ const Layout: React.SFC = () => {
     <Router>
       //header component here
 
-      {/* main content components dependend on routes */}
+      {/* main content components dependendcd creat on routes */}
       <>
         <Switch>
           <Route exact={true} path="/" component={Home} />
