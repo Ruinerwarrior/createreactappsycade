@@ -1,4 +1,4 @@
-module.exports= (conditions) => `import axios from 'axios';
+module.exports= (conditions) => `import axios, { AxiosResponse, AxiosError } from 'axios';
 
 interface Headers {
   ['Content-Type']?: string;
@@ -6,59 +6,66 @@ interface Headers {
 }
 
 interface Config {
-    method: string;
+    method: HttpRequestTypes;
     url: string;
     data: {};
     headers: {};
     params: {} | [];
 }
 
-type Resolve = (value?: {} | Promise<{}> | undefined) => void;
+type Resolve<T> = (value: T | undefined) => void;
 
-type Reject = (reason?: {} | undefined) => void;
+type Reject = (reason?: AxiosError | undefined) => void;
+
+export enum HttpRequestTypes {
+  POST = 'post',
+  GET = 'get',
+  PUT = 'put',
+  DELETE = 'delete',
+  PATCH = 'patch'
+};
 
 class ApiBase {
-    public doHttpRequest(
-        method: string, 
-        api: string, 
-        endpoint: string, 
-        data: {} | PromiseLike<{}>, 
-        params: {} | [] = {}, 
-        asFormValues: boolean = false, 
-        authenticated: boolean = true
-      ) {
-        return new Promise((resolve, reject) => {
-            this.doRequestInternal(resolve, reject, method, api, endpoint, data, params, asFormValues, authenticated);
-        });
-    }
-    private doRequestInternal(
-      resolve: Resolve, 
-      reject: Reject, 
-      method: string, 
-      api: string, 
-      endpoint: string, data: {} | PromiseLike<{}>, 
-      params: {}, 
+     
+  public doHttpRequest<T> (
+      method: HttpRequestTypes, 
+      endpoint: string, 
+      data: {} | PromiseLike<{}>, 
+      params: {} | [] = {}, 
       asFormValues: boolean = false, 
       authenticated: boolean = true
     ) {
-        let headers: Headers  = {};
+      return new Promise<T>((resolve, reject) => {
+          this.doRequestInternal<T>(resolve, reject, method, endpoint, data, params, asFormValues, authenticated);
+      });
+  } 
 
-        if(!asFormValues) {
-          headers['Content-Type'] = 'application/json';
-        }
+  private doRequestInternal<T>(
+    resolve: Resolve<T>, 
+    reject: Reject, 
+    method: HttpRequestTypes, 
+    endpoint: string, 
+    data: {} | PromiseLike<{}>, 
+    params: {}, 
+    asFormValues: boolean, 
+    authenticated: boolean
+  ) {
+      let headers: Headers  = {};
 
-        if(authenticated) {
-          headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('token');
-        }
+      if(!asFormValues) {
+        headers['Content-Type'] = 'application/json';
+      }
 
-        const url = endpoint;
-        const config: Config = { method, url, data, headers, params };
-        axios.request(config)
-        .then(response => {
-            resolve(response.data);
-        })
-        .catch(reason => reject(reason));
-    }
+      if(authenticated) {
+        headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('token');
+      }
+         
+      const url = endpoint;
+      const config: Config = { method, url, data, headers, params };
+      axios.request<T>(config)
+      .then((response: AxiosResponse<T>) => resolve(response.data))
+      .catch((error: AxiosError) => reject(error));
+  }
 }
 
 export default ApiBase;

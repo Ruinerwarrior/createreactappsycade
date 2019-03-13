@@ -19,7 +19,10 @@ type Reject = (reason?: AxiosError | undefined) => void;
 
 export enum HttpRequestTypes {
   POST = 'post',
-  GET = 'get'
+  GET = 'get',
+  PUT = 'put',
+  DELETE = 'delete',
+  PATCH = 'patch'
 };
 
 class ApiBase {
