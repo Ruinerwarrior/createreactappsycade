@@ -7,20 +7,18 @@ ${hasRouting ? `
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 ` : ``}
-const Layout: React.SFC = () => {
+const Layout: React.FunctionComponent = () => {
   return (  
     ${hasRouting ? `
     <Router>
-      //header component here
-
-      {/* main content components dependendcd creat on routes */}
       <>
+        {/* header component here */}
+        {/* main content components dependendcd creat on routes */}
         <Switch>
           <Route exact={true} path="/" component={Home} />
         </Switch>
+        {/* footer component here */}
       </>
-
-      //footer component here
     </Router>` : 
    `<Home/>`}
   );
