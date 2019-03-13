@@ -1,10 +1,9 @@
 import { async } from "../actions";
 import { TITLE } from "../constants/actions";
+import ApiTest from "../api/ApiTest";
+
+const TitleApi = new ApiTest();
 
 export function setTitle(title: string) {
-  return async<typeof TITLE, string>(TITLE, loadTitle, title)
+  return async<typeof TITLE, string | undefined>(TITLE, TitleApi.getTitle)
 }
-
-export async function loadTitle(title: string) {
-  return title;
-};

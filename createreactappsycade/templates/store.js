@@ -1,4 +1,4 @@
-module.exports = (conditions) => `import { createStore, compose, applyMiddleware } from 'redux';
+module.exports = (conditions) => `import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
