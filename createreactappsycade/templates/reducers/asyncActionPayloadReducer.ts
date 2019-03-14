@@ -1,6 +1,4 @@
-module.exports = (conditions) => {
-	return(
-`import { AsyncAction, AsyncActionStatus } from '../types/actions';
+import { AsyncAction, AsyncActionStatus } from '../types/actions';
 
 export function asyncActionPayloadOfReducer<T extends string, P>(type: T, initialState: P | null = null) {
 	return (state: P | null = initialState, action: AsyncAction<T, P>): P | null => {
@@ -9,6 +7,4 @@ export function asyncActionPayloadOfReducer<T extends string, P>(type: T, initia
 		} 
 		return state;
 	};
-}`
-	);
 }

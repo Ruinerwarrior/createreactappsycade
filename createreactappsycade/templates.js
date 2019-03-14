@@ -9,7 +9,7 @@ module.exports = [
   },
 	{ 
     fileName: 'actions/index.ts', 
-    value: require('./actions/index.js'), 
+    value: '/actions/index.ts', 
     reqconditions: ['redux', 'asyncactions'], 
     conditions:[] 
   },
@@ -25,13 +25,13 @@ module.exports = [
 	//types folder
 	{ 
     fileName: 'types/actions/index.ts', 
-    value: require('./types/actions/index.js'), 
+    value: '/types/actions/index.ts', 
     reqconditions: ['asyncactions'], 
     conditions:[] 
   },
 	{ 
     fileName: 'types/state/index.ts', 
-    value: require('./types/state/index.js'), 
+    value: '/types/state/index.ts', 
     reqconditions: ['asyncactions'], 
     conditions:[] 
   },
@@ -53,7 +53,7 @@ module.exports = [
 	//api folder
 	{ 
     fileName: 'api/BaseApi.ts', 
-    value: require('./api/BaseApi.js'), 
+    value: '/api/BaseApi.ts', 
     reqconditions: ['api'], 
     conditions:[] 
   },
@@ -61,23 +61,40 @@ module.exports = [
 	//components folder
 	{ 
     fileName: 'components/Layout/index.tsx', 
-    value: require('./components/Layout.js'), 
+    value: '/components/Layout/Layout.tsx', 
+    reqconditions: [], 
+    conditions:[] 
+	},
+	{ 
+    fileName: 'components/Layout/index.tsx', 
+    value: '/components/Layout/LayoutWithRouter.tsx', 
+    reqconditions: ['routes'], 
+    conditions:[] 
+	},
+	{ 
+    fileName: 'components/Header/index.tsx', 
+    value: '/components/Header/Header.tsx', 
     reqconditions: [], 
     conditions:[] 
   },
-
 	//containers folder
   { 
     fileName: 'containers/App/index.tsx', 
-    value: require('./containers/App.js'), 
+    value: '/containers/App/App.tsx', 
     reqconditions: [],
+    conditions:[] 
+	},
+	{ 
+    fileName: 'containers/App/index.tsx', 
+    value: '/containers/App/AppWithRedux.tsx', 
+    reqconditions: ['redux'],
     conditions:[] 
   },
 
 	//pages folder
 	{ 
     fileName: 'pages/Home/index.tsx', 
-    value: require('./pages/Home.js'), 
+    value: '/pages/Home/index.tsx', 
     reqconditions: [], 
     conditions:[] 
   },
@@ -85,25 +102,25 @@ module.exports = [
 	//reducers folder
 	{ 
     fileName: 'reducers/asyncActionPayloadReducer.ts', 
-    value: require('./reducers/asyncActionPayloadReducer.js'), 
+    value: '/reducers/asyncActionPayloadReducer.ts', 
     reqconditions: ['redux', 'asyncactions'], 
     conditions:[] 
   },
 	{ 
     fileName: 'reducers/asyncActionReducer.ts', 
-    value: require('./reducers/asyncActionReducer.js'), 
+    value: '/reducers/asyncActionReducer.ts', 
     reqconditions: ['redux','asyncactions'], 
     conditions:[] 
   },
 	{ 
     fileName: 'reducers/asyncActionStatusReducer.ts', 
-    value: require('./reducers/asyncActionStatusReducer.js'), 
+    value: '/reducers/asyncActionStatusReducer.ts', 
     reqconditions: ['redux', 'asyncactions'], 
     conditions:[] 
   },
 	{ 
     fileName: 'reducers/index.ts', 
-    value: require('./reducers/index.js'), 
+    value: '/reducers/index.ts', 
     reqconditions: ['redux'], 
     conditions:[] 
   },
@@ -112,13 +129,13 @@ module.exports = [
 	//src folder
 	{ 
     fileName: 'store.ts', 
-    value: require('./store.js'), 
+    value: '/store.ts', 
     reqconditions: ['redux'], 
     conditions:[] 
   },
 	{ 
     fileName: 'index.tsx', 
-    value: require('./index.js'), 
+    value: '/index.tsx', 
     reqconditions: [], 
     conditions:[] 
   },

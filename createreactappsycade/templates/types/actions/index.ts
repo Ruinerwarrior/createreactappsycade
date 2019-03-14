@@ -1,6 +1,4 @@
-module.exports = (conditions) => {
-	return(
-`export enum AsyncActionStatus {
+export enum AsyncActionStatus {
 	UNSTARTED = 'UNSTARTED',
 	STARTED = 'STARTED',
 	SUCCEEDED = 'SUCCEEDED',
@@ -24,6 +22,4 @@ export interface FailedAsyncAction<T> {
 	payload: Error
 }
 
-export type AsyncAction<T, P = any> = StartedAsyncAction<T> | SucceededAsyncAction<T, P> | FailedAsyncAction<T>;`
-	);
-}
+export type AsyncAction<T, P = any> = StartedAsyncAction<T> | SucceededAsyncAction<T, P> | FailedAsyncAction<T>;

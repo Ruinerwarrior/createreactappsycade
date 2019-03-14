@@ -1,4 +1,4 @@
-module.exports= (conditions) => `import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 interface Headers {
   ['Content-Type']?: string;
@@ -52,4 +52,3 @@ class ApiBase {
 }
 
 export default ApiBase;
-`

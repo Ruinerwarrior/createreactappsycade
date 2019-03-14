@@ -1,6 +1,4 @@
-module.exports = (conditions) => {
-	return(
-`import { StartedAsyncAction, SucceededAsyncAction, FailedAsyncAction, AsyncActionStatus } from "../types/actions";
+import { StartedAsyncAction, SucceededAsyncAction, FailedAsyncAction, AsyncActionStatus } from "../types/actions";
 
 function startedAsyncAction<T>(type: T): StartedAsyncAction<T> {
 	return {
@@ -35,6 +33,4 @@ export function async<T, P>(type: T, action: (...args: any[]) => Promise<P>, ...
 			dispatch(failedAsyncAction(type, error));
 		}
 	};
-}`
-	);
-};
+}
