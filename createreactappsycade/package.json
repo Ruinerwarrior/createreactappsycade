@@ -1,6 +1,6 @@
 {
   "name": "createreactappsycade",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "creates a custom template ontop of create-react-app",
   "main": "index.js",
   "scripts": {
