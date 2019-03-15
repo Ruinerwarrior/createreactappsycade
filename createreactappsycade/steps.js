@@ -1,5 +1,3 @@
-let readlineSync = require('readline-sync');
-
 module.exports = [
   {
     question: '\nDo you want to use redux with thunk?\n',
