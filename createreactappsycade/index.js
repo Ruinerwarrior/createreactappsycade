@@ -68,11 +68,10 @@ const createTemplate = async () => {
   return new Promise(resolve => {
     try {
       templates.forEach(file => {
-        console.log(file);
-        if (file.reqconditions.every(rc => conditions.includes(rc))) {
+        if (file.reqconditions.every(rc => conditions.includes(rc)) && file.noconditions.every(nc => conditions.includes(nc) ? false : true)) {
           ensureDirectoryExistence(file.fileName);
           if (file.value != null && file.fileName.includes('.')) {
-            fs.readFile(__dirname + '/templates' + file.value, 'utf8', function (err, data) {
+            fs.readFile(__dirname + '/templates/' + file.value, 'utf8', function (err, data) {
               if (err) {
                 console.log('something went wrong reading file: ' + file.value + ' error: ' + err);
               }

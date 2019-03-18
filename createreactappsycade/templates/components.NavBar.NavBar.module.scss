@@ -1,0 +1,13 @@
+.navbar {
+  width: 100vw;
+  height: 3.25rem;
+  .navbarleft {
+    margin-left: 0.5rem;
+    .title {
+      .link {
+        color: lightseagreen;
+        text-decoration: none;
+      }
+    }
+  }
+}

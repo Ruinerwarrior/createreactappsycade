@@ -23,12 +23,12 @@ module.exports = [
     packagesToInstall: ["axios"],
     devPackagesToInstall: []
   },
-  // {
-  //   question: '\nDo you want to use bulma?\n',
-  //   conditions: ["bulma"],
-  //   packagesToInstall: ["bulma"],
-  //   devPackagesToInstall: []
-  // },
+  {
+    question: '\nDo you want to use bulma?\n',
+    conditions: ["bulma"],
+    packagesToInstall: ["bulma"],
+    devPackagesToInstall: []
+  },
   {
     question: '\nDo you want sass support?\n',
     conditions: ["sass"],
