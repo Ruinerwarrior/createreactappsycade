@@ -160,19 +160,20 @@ INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (26, 9
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (26, 11);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (27, 9);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (27, 11);
-
+INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (28, 10);
+INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (28, 12);
 --stepresultconditions with packages
-INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (28, 1);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (29, 1);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (30, 1);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (31, 1);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (32, 1);
-INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (33, 5);
+INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (33, 1);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (34, 5);
 INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (35, 5);
-INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (36, 7);
-INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (37, 9);
-INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (38, 11);
+INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (36, 5);
+INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (37, 7);
+INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (38, 9);
+INSERT INTO [StepResultConditions] ([StepResultId], [ConditionId]) Values (39, 11);
 
 INSERT INTO [Packages] ([Dev], [Name]) VALUES (0, 'redux');
 INSERT INTO [Packages] ([Dev], [Name]) VALUES (0, 'react-redux');
@@ -644,6 +645,14 @@ serviceWorker.unregister();
 ');
 
 INSERT INTO [Files] ([Path], [Contents]) VALUES ('index.scss', 
+'@import "../node_modules/bulma/sass/utilities/_all";
+
+//Overwrite bulma sass variables here
+
+@import "../node_modules/bulma/bulma.sass";
+');
+
+INSERT INTO [Files] ([Path], [Contents]) VALUES ('components/NavBar/NavBar.module.css', 
 '@import "../node_modules/bulma/sass/utilities/_all";
 
 //Overwrite bulma sass variables here
