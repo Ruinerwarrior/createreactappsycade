@@ -110,6 +110,7 @@ INSERT INTO [StepResults] ([FileId], [PackageId]) Values (24, null);
 INSERT INTO [StepResults] ([FileId], [PackageId]) Values (25, null);
 INSERT INTO [StepResults] ([FileId], [PackageId]) Values (26, null);
 INSERT INTO [StepResults] ([FileId], [PackageId]) Values (27, null);
+INSERT INTO [StepResults] ([FileId], [PackageId]) Values (28, null);
 
 --stepresults with packages
 INSERT INTO [StepResults] ([FileId], [PackageId]) Values (null, 1);
@@ -653,9 +654,15 @@ INSERT INTO [Files] ([Path], [Contents]) VALUES ('index.scss',
 ');
 
 INSERT INTO [Files] ([Path], [Contents]) VALUES ('components/NavBar/NavBar.module.css', 
-'@import "../node_modules/bulma/sass/utilities/_all";
-
-//Overwrite bulma sass variables here
-
-@import "../node_modules/bulma/bulma.sass";
+'.navbar {
+  width: 100vw;
+  height: 3.25rem;
+}
+.navbarleft {
+  margin-left: 0.5rem;
+}
+.link {
+  color: lightseagreen;
+  text-decoration: none;
+}
 ');
